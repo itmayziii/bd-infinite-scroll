@@ -1,0 +1,26 @@
+{
+  "name": "infinite-scroll",
+  "version": "0.0.1",
+  "description": "Infinite scroll",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "infinite",
+    "scroll",
+    "es6"
+  ],
+  "author": "Tommy May III <tommymay37@gmail.com>",
+  "license": "MIT",
+  "peerDependencies": {
+    "jquery": "^3.0.0"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-preset-env": "^1.6.1",
+    "webpack": "^3.10.0",
+    "jquery": "^3.0.0"
+  }
+}
