@@ -222,6 +222,10 @@ export class InfiniteScroll {
     }
 
     _checkIfPageChanged() {
+
+        // Create the event
+        const pageChangedEvent = new Event('pageChangedEvent');
+
         const centerOfPage = this._screen.calculateCenterOfPage();
 
         const loadedPages = this._pages.filter(page => page.loaded === true);
@@ -232,6 +236,7 @@ export class InfiniteScroll {
         if (currentPath !== onPage.route) {
             this._router.navigate(onPage.route, false);
             this._updateMetadata(onPage);
+            this.dispatchEvent(pageChangedEvent);
         }
     }
 
