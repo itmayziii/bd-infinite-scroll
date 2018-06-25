@@ -389,7 +389,7 @@ var InfiniteScroll = exports.InfiniteScroll = function () {
             if (currentPath !== onPage.route) {
                 this._router.navigate(onPage.route, false);
                 this._updateMetadata(onPage);
-                this.dispatchEvent(pageChangedEvent);
+                window.dispatchEvent(pageChangedEvent);
             }
         }
     }, {
