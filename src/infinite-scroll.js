@@ -2,7 +2,7 @@
  * FIXME Noticing that if the page does not take up the height of the screen, the infinite scroll fails to jump to the right spot
  */
 
-import { CustomEvent } from "./customevent-polyfill.js";
+import "./customevent-polyfill.js";
 
 export class InfiniteScroll {
     constructor(window, $, router, screen, pages, metadataManager, scrollPercentage = {up: 10, down: 80}) {
