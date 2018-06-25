@@ -239,7 +239,7 @@ export class InfiniteScroll {
         if (currentPath !== onPage.route) {
             this._router.navigate(onPage.route, false);
             this._updateMetadata(onPage);
-            this.dispatchEvent(pageChangedEvent);
+            window.dispatchEvent(pageChangedEvent);
         }
     }
 
