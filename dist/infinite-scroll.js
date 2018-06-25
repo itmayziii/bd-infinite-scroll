@@ -90,14 +90,16 @@ module.exports = __webpack_require__(1);
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
+exports.InfiniteScroll = undefined;
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }(); /**
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * FIXME Noticing that if the page does not take up the height of the screen, the infinite scroll fails to jump to the right spot
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      */
+
+__webpack_require__(2);
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-/**
- * FIXME Noticing that if the page does not take up the height of the screen, the infinite scroll fails to jump to the right spot
- */
 var InfiniteScroll = exports.InfiniteScroll = function () {
     function InfiniteScroll(window, $, router, screen, pages, metadataManager) {
         var scrollPercentage = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : { up: 10, down: 80 };
@@ -371,6 +373,10 @@ var InfiniteScroll = exports.InfiniteScroll = function () {
     }, {
         key: '_checkIfPageChanged',
         value: function _checkIfPageChanged() {
+
+            // Create the event
+            var pageChangedEvent = new CustomEvent('pageChangedEvent');
+
             var centerOfPage = this._screen.calculateCenterOfPage();
 
             var loadedPages = this._pages.filter(function (page) {
@@ -383,6 +389,7 @@ var InfiniteScroll = exports.InfiniteScroll = function () {
             if (currentPath !== onPage.route) {
                 this._router.navigate(onPage.route, false);
                 this._updateMetadata(onPage);
+                this.dispatchEvent(pageChangedEvent);
             }
         }
     }, {
@@ -435,6 +442,30 @@ var InfiniteScroll = exports.InfiniteScroll = function () {
 
     return InfiniteScroll;
 }();
+
+/***/ }),
+/* 2 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+// source: https://developer.mozilla.org/en-US/docs/Web/API/CustomEvent/CustomEvent
+(function () {
+
+    if (typeof window.CustomEvent === "function") return false;
+
+    function CustomEvent(event, params) {
+        params = params || { bubbles: false, cancelable: false, detail: undefined };
+        var evt = document.createEvent('CustomEvent');
+        evt.initCustomEvent(event, params.bubbles, params.cancelable, params.detail);
+        return evt;
+    }
+
+    CustomEvent.prototype = window.Event.prototype;
+
+    window.CustomEvent = CustomEvent;
+})();
 
 /***/ })
 /******/ ]);

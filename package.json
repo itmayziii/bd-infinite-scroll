@@ -1,6 +1,6 @@
 {
   "name": "bd-infinite-scroll",
-  "version": "0.0.1",
+  "version": "0.0.2node",
   "description": "Infinite scroll",
   "main": "index.js",
   "repository": {
@@ -8,6 +8,7 @@
     "url": "https://github.com/itmayziii/bd-infinite-scroll"
   },
   "scripts": {
+    "build": "node_modules/.bin/webpack",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [

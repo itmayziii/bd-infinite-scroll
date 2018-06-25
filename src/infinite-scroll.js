@@ -1,6 +1,9 @@
 /**
  * FIXME Noticing that if the page does not take up the height of the screen, the infinite scroll fails to jump to the right spot
  */
+
+import "./customevent-polyfill.js";
+
 export class InfiniteScroll {
     constructor(window, $, router, screen, pages, metadataManager, scrollPercentage = {up: 10, down: 80}) {
         this._window = window;
@@ -222,6 +225,10 @@ export class InfiniteScroll {
     }
 
     _checkIfPageChanged() {
+
+        // Create the event
+        const pageChangedEvent = new CustomEvent('pageChangedEvent');
+
         const centerOfPage = this._screen.calculateCenterOfPage();
 
         const loadedPages = this._pages.filter(page => page.loaded === true);
@@ -232,6 +239,7 @@ export class InfiniteScroll {
         if (currentPath !== onPage.route) {
             this._router.navigate(onPage.route, false);
             this._updateMetadata(onPage);
+            this.dispatchEvent(pageChangedEvent);
         }
     }
 
